@@ -1,29 +1,39 @@
-print('Hello World!')
+def groups_per_user(group_dictionary):
+    user_groups = {}
+    # Go through group_dictionary
+    for groups, users in group_dictionary.items():
+        print('-'+groups)
+        for user in users:
+            print(user)
+            if user not in user_groups:
+                user_groups[user] = [groups]
+            else:
+                user_groups[user].append(groups)
+    return user_groups
 
-users = [
-    { "id": 0, "name": "Hero" },
-    { "id": 1, "name": "Dunn" },
-    { "id": 2, "name": "Sue" },
-    { "id": 3, "name": "Chi" },
-    { "id": 4, "name": "Thor" },
-    { "id": 5, "name": "Clive" },
-    { "id": 6, "name": "Hicks" },
-    { "id": 7, "name": "Devin" },
-    { "id": 8, "name": "Kate" },
-    { "id": 9, "name": "Klein" }
-]
 
-friendship_pairs = [
-    (0, 1), (0, 2), (1, 2), (1, 3), (2, 3), (3, 4),
-    (4, 5), (5, 6), (5, 7), (6, 8), (7, 8), (8, 9)
-    ]
+print(groups_per_user({"local": ["admin", "userA"], 
+                        "public":  ["admin", "userB"], 
+                        "administrator": ["admin"]}))
 
-# Initialize the dict with an empty list for each user id:
-friendships = {user["id"]: [] for user in users}
+wardrobe = {'shirt': ['red', 'blue', 'white'], 'jeans': ['blue', 'black']}
+new_items = {'jeans': ['white'], 'scarf': ['yellow'], 'socks': ['black', 'brown']}
+wardrobe.update(new_items)
+print(wardrobe)
 
-for i, j in friendship_pairs:   
-    friendships[i].append(j) # Add j as a friend of user i
-    friendships[j].append(i) # Add i as a friend of user j
+def add_prices(basket):
+    # Initialize the variable that will be used for the calculation
+	total = 0
+	# Iterate through the dictionary items
+	for item_value in basket.values():
+		# Add each price to the total calculation
+		# Hint: how do you access the values of
+		# dictionary items?
+		total += item_value
+	# Limit the return value to 2 decimal places
+	return round(total, 2)  
 
-import random
-print(random.sample(range(100), 10))
+groceries = {"bananas": 1.56, "apples": 2.50, "oranges": 0.99, "bread": 4.59, 
+	"coffee": 6.99, "milk": 3.39, "eggs": 2.98, "cheese": 5.44}
+
+print(add_prices(groceries)) # Should print 28.44
